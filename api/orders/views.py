@@ -55,11 +55,9 @@ def create_order():
 
         for article_data in articles_data:
             # Validate article data
-            if (
-                "article_name" not in article_data
-                or "price" not in article_data
-                or "quantity" not in article_data
-            ):
+            if ("article_name" not in article_data
+                    or "price" not in article_data
+                    or "quantity" not in article_data):
                 return {"error": "Invalid article data"}, 400
 
             # Validate quantity is a positive integer
@@ -102,15 +100,13 @@ def get_all_orders():
         if created_at_filter:
             # Filter orders created after the specified timestamp
             orders_query = orders_query.filter(
-                models.Order.created_at >= created_at_filter
-            )
+                models.Order.created_at >= created_at_filter)
         # Check if 'cancel_at' parameter is provided in the request
         cancel_at_filter = request.args.get("cancel_at")
         if cancel_at_filter:
             # Filter orders canceled after the specified timestamp
             orders_query = orders_query.filter(
-                models.Order.cancel_at >= cancel_at_filter
-            )
+                models.Order.cancel_at >= cancel_at_filter)
 
         # Get the filtered orders
         orders = orders_query.all()
@@ -193,8 +189,8 @@ def signup():
         # Creating DB connection
     user_exist = db.session.execute(
         # Select from User model (select * from user where email = user_exist
-        db.select(models.User).where(models.User.email == email)
-    ).scalar_one_or_none()
+        db.select(models.User).where(models.User.email == email
+                                     )).scalar_one_or_none()
     if user_exist:
         return {"detail": "Email already taken"}, 400
 
@@ -222,8 +218,8 @@ def login():
         return {"detail": "Missing email or password"}, 400
 
     user = db.session.execute(
-        db.select(models.User).where(models.User.email == email)
-    ).scalar_one_or_none()
+        db.select(models.User).where(
+            models.User.email == email)).scalar_one_or_none()
 
     # Checking if password is correct and also if user exist
     if not user or not check_password_hash(user.password, password):
