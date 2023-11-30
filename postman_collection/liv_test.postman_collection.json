@@ -96,17 +96,9 @@
         "url": {
           "raw": "http://127.0.0.1:5000/orders/order?created_at=2023-11-30",
           "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
+          "host": ["127", "0", "0", "1"],
           "port": "5000",
-          "path": [
-            "orders",
-            "order"
-          ],
+          "path": ["orders", "order"],
           "query": [
             {
               "key": "created_at",
