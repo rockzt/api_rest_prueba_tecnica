@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "4408a30b-588a-4f07-a13e-71c5b7bec565",
+		"name": "liv_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14342836"
+	},
+	"item": [
+		{
+			"name": "GetToken",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"rodrigo\",\n    \"last_name\": \"zavala\",\n    \"email\": \"rodrigoztrejo@gmail.com\",\n    \"password\": \"62678394\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/api/profile/"
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"rock\",\n    \"last_name\": \"zav\",\n    \"email\": \"rock@gmail.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/orders/signup/"
+			},
+			"response": []
+		},
+		{
+			"name": "CheckApiStatus",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTcwMTMyNzM2MSwiZXhwIjoxNzAxMzI5MTYxfQ.EZr3A1asrLtS07k1AQdGLeu_hvbta3bbfV0FnqvARog",
+						"type": "text"
+					}
+				],
+				"url": "http://127.0.0.1:5000/orders/health"
+			},
+			"response": []
+		},
+		{
+			"name": "CreateOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"client_name\": \"Momo\",\n  \"articles\": [\n    {\n      \"article_name\": \"Product A\",\n      \"price\": 15,\n      \"quantity\": 20\n    },\n    {\n      \"article_name\": \"Product B\",\n      \"price\": 9.99,\n      \"quantity\": 1\n    }\n    // Add more articles as needed\n  ]\n}\n"
+				},
+				"url": "http://127.0.0.1:5000/orders/order"
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/orders/order?created_at=2023-11-30",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"orders",
+						"order"
+					],
+					"query": [
+						{
+							"key": "created_at",
+							"value": "2023-11-30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/orders/order/10"
+			},
+			"response": []
+		},
+		{
+			"name": "CancelOrder",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": "http://127.0.0.1:5000/orders/order/7/cancel"
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTables",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/bd/create"
+			},
+			"response": []
+		},
+		{
+			"name": "DropTables",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/bd/drop"
+			},
+			"response": []
+		}
+	]
+}
