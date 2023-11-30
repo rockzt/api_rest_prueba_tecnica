@@ -4,10 +4,10 @@ from . import helpers
 from datetime import datetime, timedelta
 from flask import request
 import jwt  # Importin JWt library (for token)
-from werkzeug.security import generate_password_hash, check_password_hash  # Security tool for encrypting passwords
-from api.db import  db
+# Security tool for encrypting passwords
+from werkzeug.security import generate_password_hash, check_password_hash
+from api.db import db
 from api.config import Config
-
 
 
 # Check Running App
@@ -22,7 +22,7 @@ def protected():
     return "Protected View!!!"
 
 
-#Api endpoints
+# Api endpoints
 @api_blueprint.route('/order', methods=['POST'])
 @helpers.token_required
 def create_order():
@@ -82,7 +82,6 @@ def create_order():
         return {'error': str(e)}, 500
 
 
-
 @api_blueprint.route('/order', methods=['GET'])
 def get_all_orders():
     try:
@@ -92,12 +91,14 @@ def get_all_orders():
         created_at_filter = request.args.get('created_at')
         if created_at_filter:
             # Filter orders created after the specified timestamp
-            orders_query = orders_query.filter(models.Order.created_at >= created_at_filter)
+            orders_query = orders_query.filter(
+                models.Order.created_at >= created_at_filter)
         # Check if 'cancel_at' parameter is provided in the request
         cancel_at_filter = request.args.get('cancel_at')
         if cancel_at_filter:
             # Filter orders canceled after the specified timestamp
-            orders_query = orders_query.filter(models.Order.cancel_at >= cancel_at_filter)
+            orders_query = orders_query.filter(
+                models.Order.cancel_at >= cancel_at_filter)
 
         # Get the filtered orders
         orders = orders_query.all()
@@ -116,7 +117,6 @@ def get_all_orders():
         return {'error': str(e)}, 500
 
 
-
 @api_blueprint.route('/order/<int:order_id>', methods=['GET'])
 def get_single_order(order_id):
     try:
@@ -125,7 +125,7 @@ def get_single_order(order_id):
             return {'message': 'Invalid order ID'}, 400
         # Query the order by ID
         order = models.Order.query.get(order_id)
-        #Check order exist
+        # Check order exist
         if not order:
             return {'message': 'Order not found'}, 404
         # Serialize the order and its related products into a JSON response
@@ -134,7 +134,6 @@ def get_single_order(order_id):
 
     except Exception as e:
         return {'error': str(e)}, 500
-
 
 
 @api_blueprint.route('/order/<int:order_id>/cancel', methods=['PUT'])
@@ -161,7 +160,6 @@ def cancel_order(order_id):
         return {'error': str(e)}, 500
 
 
-
 # Create User
 @api_blueprint.route("/signup/", methods=["POST"])
 def signup():
@@ -179,15 +177,14 @@ def signup():
 
     passowrd = data.get("password")
     user = models.User(
-        first_name = data.get("first_name"),
-        last_name = data.get("last_name"),
-        email = email,
-        password = generate_password_hash(passowrd),  # Encrypting password
+        first_name=data.get("first_name"),
+        last_name=data.get("last_name"),
+        email=email,
+        password=generate_password_hash(passowrd),  # Encrypting password
     )
     db.session.add(user)
     db.session.commit()
     return {"detail": "User created successfully"}, 201
-
 
 
 # Get Token
@@ -217,5 +214,5 @@ def login():
             "exp": datetime.utcnow() + timedelta(minutes=30),
         },
         Config.SECRET_KEY,
-        )
+    )
     return {"token": token}
