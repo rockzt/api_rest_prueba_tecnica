@@ -133,7 +133,7 @@ def get_all_orders():
 def get_single_order(order_id):
     """
 
-    :param order_id: 
+    :param order_id:
 
     """
     try:
@@ -158,7 +158,7 @@ def get_single_order(order_id):
 def cancel_order(order_id):
     """
 
-    :param order_id: 
+    :param order_id:
 
     """
     try:
