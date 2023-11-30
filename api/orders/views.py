@@ -24,6 +24,7 @@ def protected():
 
 #Api endpoints
 @api_blueprint.route('/order', methods=['POST'])
+@helpers.token_required
 def create_order():
     try:
         # Verify that the request contains JSON data
@@ -137,6 +138,7 @@ def get_single_order(order_id):
 
 
 @api_blueprint.route('/order/<int:order_id>/cancel', methods=['PUT'])
+@helpers.token_required
 def cancel_order(order_id):
     try:
         # Check if order_id is non-positive
