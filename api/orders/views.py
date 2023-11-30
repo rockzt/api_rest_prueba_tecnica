@@ -1,14 +1,17 @@
-from datetime import datetime, timedelta
+from datetime import datetime
+from datetime import timedelta
 
 import jwt  # Importin JWt library (for token)
 from flask import request
-# Security tool for encrypting passwords
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
 
+from . import api_blueprint
+from . import helpers
+from . import models
 from api.config import Config
 from api.db import db
-
-from . import api_blueprint, helpers, models
+# Security tool for encrypting passwords
 
 
 # Check Running App
