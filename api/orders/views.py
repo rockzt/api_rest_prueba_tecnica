@@ -14,12 +14,14 @@ from . import api_blueprint, helpers, models
 # Check Running App
 @api_blueprint.route("/health", methods=["GET"])
 def health():
+    """ """
     return "Project Working Correctly from API from orders !!!"
 
 
 @api_blueprint.route("/protected", methods=["GET"])
 @helpers.token_required
 def protected():
+    """ """
     return "Protected View!!!"
 
 
@@ -27,6 +29,7 @@ def protected():
 @api_blueprint.route("/order", methods=["POST"])
 @helpers.token_required
 def create_order():
+    """ """
     try:
         # Verify that the request contains JSON data
         if not request.is_json:
@@ -87,6 +90,7 @@ def create_order():
 
 @api_blueprint.route("/order", methods=["GET"])
 def get_all_orders():
+    """ """
     try:
         # Query all orders with their related products
         orders_query = models.Order.query
@@ -124,6 +128,11 @@ def get_all_orders():
 
 @api_blueprint.route("/order/<int:order_id>", methods=["GET"])
 def get_single_order(order_id):
+    """
+
+    :param order_id: 
+
+    """
     try:
         # Check if order_id is non-positive
         if order_id <= 0:
@@ -144,6 +153,11 @@ def get_single_order(order_id):
 @api_blueprint.route("/order/<int:order_id>/cancel", methods=["PUT"])
 @helpers.token_required
 def cancel_order(order_id):
+    """
+
+    :param order_id: 
+
+    """
     try:
         # Check if order_id is non-positive
         if order_id <= 0:
@@ -168,6 +182,7 @@ def cancel_order(order_id):
 # Create User
 @api_blueprint.route("/signup/", methods=["POST"])
 def signup():
+    """ """
     data = request.get_json()
     email = data.get("email")
     if not email:
@@ -195,6 +210,7 @@ def signup():
 # Get Token
 @api_blueprint.route("/login/", methods=["POST"])
 def login():
+    """ """
     data = request.get_json()
     email = data.get("email")
     password = data.get("password")
