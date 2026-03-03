@@ -1,14 +1,27 @@
 version: '3.8'
 services:
+  web:
+    build: .
+    ports:
+      - "5001:5000"
+    environment:
+      DATABASE_URL: postgresql://admin:admin@postgres_db:5432/liv_test_docker
+    depends_on:
+      - postgres_db
+    volumes:
+      - .:/usr/src/app
+
+
   postgres_db:
-    build:
-        context: .
-        # Use the Dockerfile in the current directory to build the image
-        dockerfile: Dockerfile
+    image: postgres:16
     ports:
       - "5544:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: liv_test_docker
 
   pgadmin:
     image: dpage/pgadmin4

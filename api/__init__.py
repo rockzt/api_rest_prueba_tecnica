@@ -1,5 +1,4 @@
 from flask import Flask
-
 from api.orders import api_blueprint # Import api variable from blueprint
 from api.config import Config  # Importing Config class
 from api.db import db  # Importing DB file
