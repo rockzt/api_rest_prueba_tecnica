@@ -219,3 +219,10 @@ def login():
         Config.SECRET_KEY,
         )
     return {"token": token}
+
+
+# Refresh Token - Pending
+@api_blueprint.route("/refresh", methods=["POST"])
+def refresh_token():
+    data = request.get_json()
+    print(data)

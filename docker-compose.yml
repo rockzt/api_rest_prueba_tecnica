@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  postgres_db:
+    build:
+        context: .
+        # Use the Dockerfile in the current directory to build the image
+        dockerfile: Dockerfile
+    ports:
+      - "5544:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres_db # Ensures postgres starts first
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  # Define a custom network for the services to communicate
+  mynet:
+    driver: bridge
+

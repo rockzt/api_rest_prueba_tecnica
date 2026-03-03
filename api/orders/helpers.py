@@ -70,7 +70,8 @@ def token_required(func):
             payload = jwt.decode(token, Config.SECRET_KEY, algorithms=["HS256"])
         except jwt.exceptions.ExpiredSignatureError:
             return {"detail" : "Token Expired"}, 401
-        except jwt.exceptions.InvalidTokenError:
+        except jwt.exceptions.InvalidTokenError as e:
+            print(e)
             return {"detail" : "Invalid Token"}, 401
 
         request.user = db.session.execute(
