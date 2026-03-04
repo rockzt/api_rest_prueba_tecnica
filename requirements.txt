@@ -2,6 +2,6 @@ Flask
 Flask-Migrate
 python-dotenv
 psycopg2-binary
-PyJWT
+PyJWT==2.9.0
 Flask-SQLAlchemy
 pytest

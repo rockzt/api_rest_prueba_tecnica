@@ -8,7 +8,6 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)  # Passing Config class with custom variables (also DB  variables)  - RECOMMENDED
     #app.config.from_file(Config)  # Passing Config file with custom variables
-
     # Starting DB connection, to connect use SQLALCHEMY_DATABASE_URI
     db.init_app(app)
 

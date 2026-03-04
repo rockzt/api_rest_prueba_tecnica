@@ -218,6 +218,7 @@ def login():
         },
         Config.SECRET_KEY,
         )
+    print(f'Token generated: {token}', flush=True)
     return {"token": token}
 
 

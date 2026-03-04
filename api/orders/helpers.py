@@ -61,17 +61,19 @@ def token_required(func):
 
         print(f"Authorization Value: {authorization}")
         token = authorization.split(" ")[1]
+        print(f'Token Value: {token}')
 
         if not token:
             return {"detail": "Missing Token"}, 401
 
         # Validates token still valid
+        print(Config.SECRET_KEY, flush=True)
         try:
             payload = jwt.decode(token, Config.SECRET_KEY, algorithms=["HS256"])
         except jwt.exceptions.ExpiredSignatureError:
             return {"detail" : "Token Expired"}, 401
         except jwt.exceptions.InvalidTokenError as e:
-            print(e)
+            print(e, flush=True)
             return {"detail" : "Invalid Token"}, 401
 
         request.user = db.session.execute(

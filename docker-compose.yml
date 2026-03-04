@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   web:
     build: .
@@ -10,6 +9,8 @@ services:
       - postgres_db
     volumes:
       - .:/usr/src/app
+
+
 
 
   postgres_db:
